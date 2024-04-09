@@ -186,7 +186,7 @@ st.success(
     """
     교회 오는 길: [지도 확인하기](https://naver.me/FmgnWHFP)
     """,
-    icon="🏃",
+    icon="🏃🏃‍♀",
 )
 
 st.image("https://relaxing-film.com/wp-content/uploads/2024/04/way-to-come.png")
