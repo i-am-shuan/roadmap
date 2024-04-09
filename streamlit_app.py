@@ -169,44 +169,24 @@ st.balloons()
 st.write(
     """
     # 5월 12일! 함께하는 기쁨, 특별한 만남 💕
-    하나님의 사랑이 가득 넘치는 이곳! '임학 성광교회'에 기쁨으로 초대합니다. 🤗
+    하나님의 사랑이 가득 넘치는 이곳!✨ '임학 성광교회'에 기쁨으로 초대합니다. 🤗
     """
 )
 
 st.image("https://relaxing-film.com/wp-content/uploads/2024/04/invite_friends.jpeg")
 
-st.success(
-    """
-    교회 오는 길: [네이버 지도로 확인하기](https://naver.me/FmgnWHFP)
-    """,
-    icon="🏃",
-)
-st.image("https://relaxing-film.com/wp-content/uploads/2024/04/way-to-come.png")
-
 st.info(
     """
-    임학 성광교회: [홈페이지](http://www.sgch.net)
+    임학 성광교회: [홈페이지](http://www.sgch.net), [유튜브](https://www.youtube.com/@ImhakSGCH)
     """,
     icon="⛪",
 )
 
-st.info(
+st.success(
     """
-    임학 성광교회: [유튜브](https://www.youtube.com/@ImhakSGCH)
+    교회 오는 길: [지도 확인하기](https://naver.me/FmgnWHFP)
     """,
-    icon="🙏",
+    icon="🏃",
 )
 
-# results = _get_raw_roadmap()["results"]
-# roadmap_by_group = _get_roadmap(results)  # , group_by)
-
-# sorted_groups = sorted(roadmap_by_group.keys(), key=lambda x: QUARTER_SORT[x])
-# current_quarter_index = QUARTER_SORT[_get_current_quarter_label()]
-# past_groups = filter(lambda x: QUARTER_SORT[x] < current_quarter_index, sorted_groups)
-# future_groups = filter(
-#     lambda x: QUARTER_SORT[x] >= current_quarter_index, sorted_groups
-# )
-
-# with st.expander("Show past quarters"):
-#     _draw_groups(roadmap_by_group, past_groups)
-# _draw_groups(roadmap_by_group, future_groups)
+st.image("https://relaxing-film.com/wp-content/uploads/2024/04/way-to-come.png")
