@@ -5,9 +5,8 @@ from collections import defaultdict, namedtuple
 import streamlit as st
 from notion_client import Client
 
-st.set_page_config("Roadmap", "https://streamlit.io/favicon.svg")
-TTL = 24 * 60 * 60
-
+# st.set_page_config("Roadmap", "https://streamlit.io/favicon.svg")
+# TTL = 24 * 60 * 60
 Project = namedtuple(
     "Project",
     [
@@ -19,67 +18,6 @@ Project = namedtuple(
         "quarter",
     ],
 )
-
-
-@st.cache_data(ttl=TTL, show_spinner="Fetching roadmap...")
-def _get_raw_roadmap():
-    notion = Client(auth=st.secrets.notion.token)
-    return notion.databases.query(
-        database_id=st.secrets.notion.projects_database_id,
-        filter={
-            "property": "Show on public Streamlit roadmap",
-            "checkbox": {"equals": True},
-        },
-    )
-
-
-@st.cache_data(ttl=TTL, show_spinner="Fetching roadmap...")
-def _get_roadmap(results):
-    roadmap = defaultdict(list)
-
-    for result in results:
-        props = result["properties"]
-
-        title = _get_plain_text(props["Name"]["title"])
-        # Manually remove "(parent project)" and "(release)" and "(experimental release)" from titles.
-        # TODO: Could extend this to remove everything in brackets. 
-        title = title.replace("(parent project)", "")
-        title = title.replace("(release)", "")
-        title = title.replace("(experimental release)", "")
-        title = title.replace("(PrPr)", "")
-        title = title.replace("(PuPr)", "")
-        title = title.replace("(GA)", "")
-        title = title.replace(" - FKA st.database", "")
-        if "icon" in result and result["icon"]["type"] == "emoji":
-            icon = result["icon"]["emoji"]
-        else:
-            icon = "🏳️"
-        public_description = _get_plain_text(props["Public description"]["rich_text"])
-
-        if "Stage" in props:
-            stage = props["Stage"]["select"]["name"]
-        else:
-            stage = ""
-
-        if (
-            "Quarter" in props
-            and props["Quarter"]["select"] is not None
-        ):
-            quarter = props["Quarter"]["select"]["name"]
-        else:
-            quarter = "Future"
-
-        p = Project(
-            id=result["id"],
-            title=title,
-            icon=icon,
-            public_description=public_description,
-            stage=stage,
-            quarter=quarter,
-        )
-        roadmap[quarter].append(p)
-
-    return roadmap
 
 
 def _get_current_quarter_label():
@@ -225,45 +163,50 @@ def _draw_groups(roadmap_by_group, groups):
             b.markdown(f"<strong>{p.title}</strong> {stage}{description}", unsafe_allow_html=True)
 
 
-
-st.image("https://streamlit.io/images/brand/streamlit-mark-color.png", width=78)
+st.balloons()
+# st.image("https://streamlit.io/images/brand/streamlit-mark-color.png", width=78)
 
 st.write(
     """
-    # Streamlit roadmap
-
-    Welcome to our roadmap! 👋 This app shows some projects we're working on or have
-    planned for the future. Plus, there's always more going on behind the scenes — we
-    sometimes like to surprise you ✨
+    # 5월 12일! 함께하는 기쁨, 특별한 만남 💕
+    하나님의 사랑이 가득 넘치는 이곳! '임학 성광교회'에 기쁨으로 초대합니다. 🤗
     """
+)
+
+st.image("https://relaxing-film.com/wp-content/uploads/2024/04/invite_friends.jpeg")
+
+st.success(
+    """
+    교회 오는 길: [네이버 지도로 확인하기](https://naver.me/FmgnWHFP)
+    """,
+    icon="🏃",
+)
+st.image("https://relaxing-film.com/wp-content/uploads/2024/04/way-to-come.png")
+
+st.info(
+    """
+    임학 성광교회: [홈페이지](http://www.sgch.net)
+    """,
+    icon="⛪",
 )
 
 st.info(
     """
-    Need a feature that's not on here?
-    [Let us know by opening a GitHub issue!](https://github.com/streamlit/streamlit/issues)
+    임학 성광교회: [유튜브](https://www.youtube.com/@ImhakSGCH)
     """,
-    icon="👾",
+    icon="🙏",
 )
 
-st.success(
-    """
-    Read [the blog post on Streamlit's roadmap](https://blog.streamlit.io/the-next-frontier-for-streamlit/)
-    to understand our broader vision.
-    """,
-    icon="🗺",
-)
+# results = _get_raw_roadmap()["results"]
+# roadmap_by_group = _get_roadmap(results)  # , group_by)
 
-results = _get_raw_roadmap()["results"]
-roadmap_by_group = _get_roadmap(results)  # , group_by)
+# sorted_groups = sorted(roadmap_by_group.keys(), key=lambda x: QUARTER_SORT[x])
+# current_quarter_index = QUARTER_SORT[_get_current_quarter_label()]
+# past_groups = filter(lambda x: QUARTER_SORT[x] < current_quarter_index, sorted_groups)
+# future_groups = filter(
+#     lambda x: QUARTER_SORT[x] >= current_quarter_index, sorted_groups
+# )
 
-sorted_groups = sorted(roadmap_by_group.keys(), key=lambda x: QUARTER_SORT[x])
-current_quarter_index = QUARTER_SORT[_get_current_quarter_label()]
-past_groups = filter(lambda x: QUARTER_SORT[x] < current_quarter_index, sorted_groups)
-future_groups = filter(
-    lambda x: QUARTER_SORT[x] >= current_quarter_index, sorted_groups
-)
-
-with st.expander("Show past quarters"):
-    _draw_groups(roadmap_by_group, past_groups)
-_draw_groups(roadmap_by_group, future_groups)
+# with st.expander("Show past quarters"):
+#     _draw_groups(roadmap_by_group, past_groups)
+# _draw_groups(roadmap_by_group, future_groups)
