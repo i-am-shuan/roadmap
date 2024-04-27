@@ -173,7 +173,7 @@ st.write(
     """
 )
 
-st.image("https://relaxing-film.com/wp-content/uploads/2024/04/invite_friends.jpeg")
+st.image("https://relaxing-film.com/wp-content/uploads/2024/04/invite_friends.png")
 
 st.info(
     """
