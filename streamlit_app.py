@@ -168,12 +168,13 @@ st.balloons()
 
 st.write(
     """
-    ## 5월 12일! 함께하는 기쁨, 특별한 만남 💕
+    ## 5월 19일! 함께하는 기쁨, 특별한 만남 💕
     하나님의 사랑이 가득 넘치는 이곳!✨ '임학 성광교회'에 기쁨으로 초대합니다. 🤗
     """
 )
 
-st.image("https://relaxing-film.com/wp-content/uploads/2024/04/invite_friends.png")
+# st.image("https://relaxing-film.com/wp-content/uploads/2024/04/invite_friends.png")
+st.image("https://relaxing-film.com/wp-content/uploads/2024/05/invite_friends_0519.png")
 
 st.info(
     """
